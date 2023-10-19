@@ -74,3 +74,10 @@ SELECT industry, SUM(revenue) AS total_revenue
 FROM fortune_companies
 GROUP BY industry
 HAVING total_revenue >300;
+
+SELECT *
+FROM fortune_companies
+WHERE industry IN("Energy","Technology")
+AND avg_employee_tenure >5.0
+GROUP BY industry;
+
