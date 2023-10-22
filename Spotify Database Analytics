@@ -44,7 +44,7 @@ FROM BIT_DB.spotifydata
 ORDER BY popularity desc
 LIMIT 10
 
-Then, I calculated the average popularity of the artists, and with each that had an average popularity 
+Then, using a CTE, I calculated the average popularity of the artists, and with each that had an average popularity 
 rating of 90 or above, I labeled them as a 'Top Star'.
 WITH popularity_average_CTE AS (
 SELECT s.artist_name,
