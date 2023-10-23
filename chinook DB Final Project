@@ -1,44 +1,53 @@
-#I began by viewing all the information in the DB to see if I can find any commonalities#
+#I began by viewing all the information in the DB to see if I can find any shared information between tables
 SELECT *
 FROM customers;
 
+#Then I showed all the customers who are not located in the US.
 Select c.CustomerId, c.Firstname, c.LastName, c.Country
 From customers c
 Where c.Country!= 'USA';
 
+#Then, I showed all the customers located in Canada.
 Select * from customers
 WHERE Country='Canada'
 
+#I then located all the invoices for the customers who are from Canada.
 SELECT c.FirstName, c.Lastname, i.InvoiceID, i.BillingCountry
 from chinook.customers c
 inner join chinook.invoices i
 on c.CustomerID=i.CustomerID
 WHERE i.BillingCountry='Canada';
 
+#Then I selected all the employees who are IT Staff.
 Select e.EmployeeId, e.FirstName, e.Lastname, e.Title
 From chinook.employees e
 Where e.Title='IT Staff';
 
+#I the provided a query that shows the invoices that are associated with each sales agent. 
 select e.LastName, e.FirstName, i.InvoiceId
 from chinook.employees e
 join chinook.customers c
 ON c.SupportRepId=e.EmployeeId
 join chinook.invoices i ON i.CustomerId=c.CustomerId;
 
+#Then, I selected the invoice total, customer name, and agent name for all invoices and customers.
 Select i.total, c.Lastname, c.FirstName, c.Country, e.LastName, e.FirstName
 from chinook.customers c 
 join chinook.employees e ON c.SupportRepId=e.EmployeeId
 join chinook.invoices i
 ON i.CustomerID=c.CustomerID;
 
+#I calculated how many invoiced there were in the year 2012.
 select Count(*)
 from chinook.Invoices
 WHERE InvoiceDate BETWEEN '2012-01-01' AND '2012-12-31';
 
+#Then I calculated what the total sales were for the year 2012.
 Select SUM(total)
 from chinook.invoices
 WHERE InvoiceDate BETWEEN '2012-01-01' AND '2012-12-31';
 
+#Finally, I showed the total sales made by each sales agent. 
 select e.Lastname, e.FirstName
 ,round (SUM(i.Total), 2) as 'Total Sales'
 from chinook.employees e
