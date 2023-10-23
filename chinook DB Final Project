@@ -1,0 +1,48 @@
+#I began by viewing all the information in the DB to see if I can find any commonalities#
+SELECT *
+FROM customers;
+
+Select c.CustomerId, c.Firstname, c.LastName, c.Country
+From customers c
+Where c.Country!= 'USA';
+
+Select * from customers
+WHERE Country='Canada'
+
+SELECT c.FirstName, c.Lastname, i.InvoiceID, i.BillingCountry
+from chinook.customers c
+inner join chinook.invoices i
+on c.CustomerID=i.CustomerID
+WHERE i.BillingCountry='Canada';
+
+Select e.EmployeeId, e.FirstName, e.Lastname, e.Title
+From chinook.employees e
+Where e.Title='IT Staff';
+
+select e.LastName, e.FirstName, i.InvoiceId
+from chinook.employees e
+join chinook.customers c
+ON c.SupportRepId=e.EmployeeId
+join chinook.invoices i ON i.CustomerId=c.CustomerId;
+
+Select i.total, c.Lastname, c.FirstName, c.Country, e.LastName, e.FirstName
+from chinook.customers c 
+join chinook.employees e ON c.SupportRepId=e.EmployeeId
+join chinook.invoices i
+ON i.CustomerID=c.CustomerID;
+
+select Count(*)
+from chinook.Invoices
+WHERE InvoiceDate BETWEEN '2012-01-01' AND '2012-12-31';
+
+Select SUM(total)
+from chinook.invoices
+WHERE InvoiceDate BETWEEN '2012-01-01' AND '2012-12-31';
+
+select e.Lastname, e.FirstName
+,round (SUM(i.Total), 2) as 'Total Sales'
+from chinook.employees e
+join chinook.customers c ON e.EmployeeID=c.SupportRepId
+join chinook.invoices i ON i.CustomerId=c.CustomerId
+Where e.Title='Sales Support Agent'
+Group by e.FirstName;
