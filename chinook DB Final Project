@@ -18,12 +18,12 @@ inner join chinook.invoices i
 on c.CustomerID=i.CustomerID
 WHERE i.BillingCountry='Canada';
 
-#Then I selected all the employees who are IT Staff.
+#I selected all the employees who are IT Staff.
 Select e.EmployeeId, e.FirstName, e.Lastname, e.Title
 From chinook.employees e
 Where e.Title='IT Staff';
 
-#I the provided a query that shows the invoices that are associated with each sales agent. 
+#I provided a query that shows the invoices that are associated with each sales agent. 
 select e.LastName, e.FirstName, i.InvoiceId
 from chinook.employees e
 join chinook.customers c
@@ -37,7 +37,7 @@ join chinook.employees e ON c.SupportRepId=e.EmployeeId
 join chinook.invoices i
 ON i.CustomerID=c.CustomerID;
 
-#I calculated how many invoiced there were in the year 2012.
+#I calculated how many invoices there were in the year 2012.
 select Count(*)
 from chinook.Invoices
 WHERE InvoiceDate BETWEEN '2012-01-01' AND '2012-12-31';
