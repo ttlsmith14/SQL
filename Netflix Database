@@ -56,11 +56,12 @@ VALUES
     ('s20', NULL, 'Blanca SuÃ¡rez| IvÃ¡n Marcos| Ã“scar Casas| AdriÃ¡n Lastra| Francesc Garrido| Stefan Weinert| Julia MÃ¶ller| Alicia Chojnowski')
     ;
 
-
+#Join the tables based on one of their common attributes.
 SELECT "netflix_titles_info"."show_id","netflix_people"."show_id"
 FROM "netflix_titles_info"
 LEFT JOIN "netflix_people"
 ON "netflix_titles_info"."show_id"="netflix_people"."show_id";
+
 
 SELECT people.show_id
 ,people.director
@@ -70,23 +71,28 @@ FROM "netflix_titles_info" titles
 LEFT JOIN "netflix_people" people
 ON people.show_id=titles.show_id;
 
+#How many movies (not TV shows) are there? 
 SELECT count(*) "type"
 FROM "netflix_titles_info"
 WHERE "type"='Movie'
 GROUP BY "type";
 
+#When was the most recent movie/TV show added?
 SELECT max (date(date_added))
 FROM "netflix_titles_info";
 
+#Arrange all the movies and shows in alphebetical order. 
 SELECT * 
 FROM "netflix_titles_info"
 ORDER BY title asc;
 
+#Who is the director for the 'The Starling'?
 SELECT director 
 FROM "netflix_titles_info" titles
 LEFT JOIN "netflix_people" people
 ON titles.show_id=people.show_id
 WHERE titles.title='The Starling';
+
 
 SELECT title, release_year
 FROM "netflix_titles_info"
