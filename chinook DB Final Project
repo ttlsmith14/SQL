@@ -1,4 +1,4 @@
-#I began by viewing all the information in the DB to see if I can find any shared information between tables
+#I began by viewing all the information in the DB to see if I can find any related information between tables
 SELECT *
 FROM customers;
 
