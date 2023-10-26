@@ -24,9 +24,9 @@ duration_ms integer NOT NULL,
 time_signature integer NOT NULL 
 )
 
-Then I inserted the Spotify Data .csv into the table.
+#Then I inserted the Spotify Data .csv into the table.
 
-Next, I explored the data using the following SQL. 
+#Next, I explored the data using the following SQL. 
 
 #First I determined the avg popularity, danceability, and energy by artist and track. 
 SELECT
