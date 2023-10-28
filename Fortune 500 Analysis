@@ -56,26 +56,30 @@ VALUES
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
-
+#Get a quick overview of all information available in the table
 SELECT *
 FROM fortune_companies;
 
+#Select the companies that have at least 10K employees
 SELECT company_name,employees
 FROM fortune_companies
 WHERE employees>=10000
 ORDER BY employees desc;
 
+#Show the campanies who have employees that have been working there for more than 5 years
 SELECT company_name,
 CASE WHEN avg_employee_tenure >5 THEN 1
 ELSE 0 END AS "tenured"
 FROM fortune_companies;
 
+#Show which industries have total revenue of over 300
 SELECT industry, SUM(revenue) AS total_revenue
 FROM fortune_companies
 GROUP BY industry
 HAVING total_revenue >300;
 
-SELECT *
+#Of the Enery and Technology industries, show which companies have an avg employee tenure of more than 5 years.
+SELECT company_name
 FROM fortune_companies
 WHERE industry IN("Energy","Technology")
 AND avg_employee_tenure >5.0
