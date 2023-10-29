@@ -1,0 +1,11 @@
+#These are examples of practice SQL that I have written using dummy databases, tables, and questions. 
+
+#Show the customer id, transaction id, purchase amount, and that same amount with a 33% discout for every customer's 3rd purchase. 
+SELECT customer_id, transaction_id, amount, amount * 0.67 AS discounted_amount
+FROM (
+    SELECT customer_id, transaction_id, amount, ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY transaction_id) AS rn
+    FROM purchases
+) t
+WHERE rn = 3
+ORDER BY customer_id ASC;
+
