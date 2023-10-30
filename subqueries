@@ -1,0 +1,30 @@
+Select EmployeeID, JobTitle, Salary
+From EmployeeSalary
+
+##Subquery in Select
+
+Select EmployeeID, Salary, (Select AVG(Salary) From EmployeeSalary) as AllAvgSalary
+From EmployeeSalary
+
+##with Partition By
+Select EmployeeID, Salary, AVG(Salary) over () as AllAvgSalary
+From EmployeeSalary
+
+## Subquery in From stmt
+
+Select a.EmployeeID, AllAvgSalary
+From 
+	(Select EmployeeID, Salary, AVG(Salary) over () as AllAvgSalary
+	 From EmployeeSalary) a
+Order by a.EmployeeID
+
+
+##Subquery in Where stmt
+
+
+Select EmployeeID, JobTitle, Salary
+From EmployeeSalary
+where EmployeeID in (
+	Select EmployeeID 
+	From EmployeeDemographics
+	where Age > 30)
