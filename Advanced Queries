@@ -1,0 +1,10 @@
+WITH SalaryCTE AS (
+  Select department, MIN(salary) AS lowest_salary
+  from employee_raise
+  group by department
+)
+
+Select e.employee_id, e.department, e.salary AS old_salary, ROUND(e.salary * 1.15, 2) AS new_salary
+from employee_raise e
+JOIN SalaryCTE ON e.department = SalaryCTE.department AND e.salary = SalaryCTE.lowest_salary
+Order By new_salary DESC;
