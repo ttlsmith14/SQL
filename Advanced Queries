@@ -8,3 +8,19 @@ Select e.employee_id, e.department, e.salary AS old_salary, ROUND(e.salary * 1.1
 from employee_raise e
 JOIN SalaryCTE ON e.department = SalaryCTE.department AND e.salary = SalaryCTE.lowest_salary
 Order By new_salary DESC;
+
+
+
+
+WITH RECURSIVE EmployeeHierarchy AS (
+  SELECT Employee_ID, 0 AS Level
+  FROM employee_hierarchy
+  WHERE Supervisor_ID IS NULL
+  UNION ALL
+  SELECT H.Employee_ID, EH.Level + 1 AS Level
+  FROM employee_hierarchy H
+  JOIN EmployeeHierarchy EH ON EH.Employee_ID = H.Supervisor_ID
+)
+SELECT Employee_ID, Level
+FROM EmployeeHierarchy
+ORDER BY Employee_ID;
